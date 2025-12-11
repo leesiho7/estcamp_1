@@ -2,7 +2,7 @@
 public class 박지호 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// 건들지마소
 
 	}
 
