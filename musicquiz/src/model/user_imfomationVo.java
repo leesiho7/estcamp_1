@@ -1,6 +1,6 @@
 package model;
 
-public class user_imfomation {
+public class user_imfomationVo {
 private String userId;
 private String userPw;
 private int raking;
@@ -39,14 +39,14 @@ public String toString() {
 }
 
 // 기본생성자 // 전체 멤버를 필요로하는 생성자
-public user_imfomation (String userId, String userPw, int raking, int point) {
+public user_imfomationVo (String userId, String userPw, int raking, int point) {
 	this.userId = userId;
 	this.userPw = userPw;
 	this.raking = raking;
 	this.point = point;
 }
 
-public user_imfomation () {
+public user_imfomationVo () {
 }
 
 }

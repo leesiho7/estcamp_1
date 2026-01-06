@@ -1,6 +1,6 @@
 package model;
 
-public class song_raking {
+public class song_rakingVo {
 	private String songName;
 	private int correctedNumber;
 	private int songRaking;
@@ -37,13 +37,13 @@ public class song_raking {
 	}
 
 	// 기본생성자 // 전체 멤버를 필요로하는 생성자
-	public song_raking (String songName, int correctNumber, int raking) {
+	public song_rakingVo (String songName, int correctNumber, int raking) {
 		this.songName = songName;
 		this.correctedNumber = correctedNumber;
 		this.songRaking = songRaking;
 	}
 
-	public song_raking () {
+	public song_rakingVo () {
 	}
 
 }
