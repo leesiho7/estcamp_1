@@ -1,0 +1,45 @@
+package model;
+
+public class user_ranking {
+	private String userId;
+	private int correctNumber;
+	private int raking;
+	
+
+	// Getter // Setter
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public int getcorrectNumber() {
+		return correctNumber;
+	}
+	public void setcorrectNumber(int correctNumber) {
+		this.correctNumber = correctNumber;
+	}
+	public int getRanking() {
+		return raking;
+	}
+	public void setRanking(int raking) {
+		this.raking = raking;
+	}
+
+	// toString
+	@Override
+	public String toString() {
+		return "User_Ranking [userId=" + userId+ ", number=" + correctNumber + ", raking=" + raking + "]";
+	}
+
+	// 기본생성자 // 전체 멤버를 필요로하는 생성자
+	public user_ranking (String userId, int correctNumber, int raking) {
+		this.userId = userId;
+		this.correctNumber = correctNumber;
+		this.raking = raking;
+	}
+
+	public user_ranking () {
+	}
+
+	}
