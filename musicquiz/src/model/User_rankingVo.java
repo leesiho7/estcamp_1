@@ -24,7 +24,7 @@ public class User_rankingVo {
 		return ranking;
 	}
 	public void setRanking(int ranking) {
-		this.ranking = raking;
+		this.ranking = ranking;
 	}
 	public int getPoint() {
 		return point;
@@ -36,7 +36,7 @@ public class User_rankingVo {
 	// toString
 	@Override
 	public String toString() {
-		return "User_Ranking [userId=" + userId+ ", number=" + correctNumber + ", ranking=" + raking+ ", point=" + point + "]";
+		return "User_Ranking [userId=" + userId+ ", number=" + correctNumber + ", ranking=" + ranking+ ", point=" + point + "]";
 	}
 
 	// 기본생성자 // 전체 멤버를 필요로하는 생성자

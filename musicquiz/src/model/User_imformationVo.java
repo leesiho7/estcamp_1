@@ -42,8 +42,7 @@ public class User_imformationVo {
 // toString
 	@Override
 	public String toString() {
-		return "User_Imformation [userId=" + userId + ", userPw=" + userPw + ", raking=" + raking + ", point=" + point
-				+ "]";
+		return "User_Imformation [userId=" + userId + ", userPw=" + userPw + ", raking=" + ranking + ", point=" + point+ "]";
 	}
 
 // 기본생성자 // 전체 멤버를 필요로하는 생성자
