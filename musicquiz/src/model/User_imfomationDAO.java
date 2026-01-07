@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class User_rankingDAO {
+public class User_imfomationDAO {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
 	
-	public User_rankingDAO() {
+	public User_imfomationDAO() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -36,12 +36,12 @@ public class User_rankingDAO {
 		}
 	}
 	
-	public ArrayList<User_rankingVo> selectAll() {
-		ArrayList<User_rankingVo> result = null;
+	public ArrayList<User_imfomationVo> selectAll() {
+		ArrayList<User_imfomationVo> result = null;
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RAKING, POINT FROM USER_RANKING ORDER BY USER_ID";
+		String sql = "SELECT USER_ID, USER_PW, RAKING, POINT FROM USER_IMFOMATION ORDER BY USER_ID";
 		
 		// 4. 실행 후 처리
 		try {
@@ -50,14 +50,14 @@ public class User_rankingDAO {
 			
 			while(rs.next()) {
 				if (result == null) {
-					result = new ArrayList<User_rankingVo>();
+					result = new ArrayList<User_imfomationVo>();
 				}
 				
 				String userId = rs.getString(1);
-				int correctnumber = rs.getInt(2);
+				String userPw = rs.getString(2);
 				int ranking = rs.getInt(3);
 				int point = rs.getInt(4);
-				result.add(new User_rankingVo(userId, correctnumber, ranking, point));
+				result.add(new User_imfomationVo(userId, userPw, ranking, point));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class User_rankingDAO {
 	}
 	
 	// INSERT
-	public boolean insert(User_rankingVo vo) {
+	public boolean insert(User_imfomationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -77,7 +77,7 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_RAKING(USER_ID, CORRECTNUMBER, RAKING, POINT) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_IMFOMATION(USER_ID, USER_PW, RAKING, POINT) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -86,7 +86,7 @@ public class User_rankingDAO {
 			
 			// 실제 값 적용
 			psmt.setString(1, vo.getUserId());
-			psmt.setInt(2, vo.getcorrectNumber());
+			psmt.setString(2, vo.getUserPw());
 			psmt.setInt(3, vo.getRanking());
 			psmt.setInt(4, vo.getPoint());
 			
@@ -107,7 +107,7 @@ public class User_rankingDAO {
 	}
 	
 	// UPDATE
-	public boolean update(User_rankingVo vo) {
+	public boolean update(User_imfomationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -115,16 +115,15 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - UPDATE
-		String sql = "UPDATE USER_RAKING SET CORRECTNUMBER = ?, RAKING = ? , POINT = ? WHERE USER_ID = ? ";
+		String sql = "UPDATE USER_IMFORMATION SET RAKING = ? , POINT = ? WHERE USER_ID = ? ";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setInt(1, vo.getcorrectNumber());
-			psmt.setInt(2, vo.getRanking());
-			psmt.setInt(3, vo.getPoint());
+			psmt.setInt(1, vo.getRanking());
+			psmt.setInt(2, vo.getPoint());
 			psmt.setString(3, vo.getUserId());
 			
 			// 실행
@@ -151,7 +150,7 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_RAKING WHERE USER_ID = ?";
+		String sql = "DELETE FROM USER_IMFOMATION WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
@@ -187,13 +186,13 @@ public class User_rankingDAO {
 		}
 	}
 
-	public User_rankingVo select(String userId) {
-		User_rankingVo result = null;
+	public User_imfomationVo select(String userId) {
+		User_imfomationVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RAKING, POINT FROM USER_RAKING WHERE USER_ID = ?";
+		String sql = "SELECT USER_ID, CORRECTNUMBER, RAKING, POINT FROM USER_IMFORMATION WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
@@ -205,10 +204,10 @@ public class User_rankingDAO {
 			// 실행
 			rs = psmt.executeQuery();
 			while(rs.next()) {
-				int correctnumber = rs.getInt(2);
+				String userPw = rs.getString(2);
 				int ranking = rs.getInt(3);
 				int point = rs.getInt(4);
-				result = new User_rankingVo(userId, correctnumber, ranking, point);
+				result = new User_imfomationVo(userId, userPw, ranking, point);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
