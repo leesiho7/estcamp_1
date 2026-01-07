@@ -1,6 +1,6 @@
 package model;
 
-public class user_rankingVo {
+public class User_rankingVo {
 	private String userId;
 	private int correctNumber;
 	private int raking;
@@ -40,14 +40,14 @@ public class user_rankingVo {
 	}
 
 	// 기본생성자 // 전체 멤버를 필요로하는 생성자
-	public user_rankingVo (String userId, int correctNumber, int raking, int point) {
+	public User_rankingVo (String userId, int correctNumber, int raking, int point) {
 		this.userId = userId;
 		this.correctNumber = correctNumber;
 		this.raking = raking;
 		this.point = point;
 	}
 
-	public user_rankingVo () {
+	public User_rankingVo () {
 	}
 
 	}

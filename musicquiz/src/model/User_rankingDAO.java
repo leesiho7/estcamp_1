@@ -1,4 +1,4 @@
-package basic;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class user_rankingDAO {
+public class User_rankingDAO {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
 	
-	public user_rankingDAO() {
+	public User_rankingDAO() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -36,8 +36,8 @@ public class user_rankingDAO {
 		}
 	}
 	
-	public ArrayList<user_rankingVo> selectAll() {
-		ArrayList<user_rankingVo> result = null;
+	public ArrayList<User_rankingVo> selectAll() {
+		ArrayList<User_rankingVo> result = null;
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
@@ -50,14 +50,14 @@ public class user_rankingDAO {
 			
 			while(rs.next()) {
 				if (result == null) {
-					result = new ArrayList<user_rankingVo>();
+					result = new ArrayList<User_rankingVo>();
 				}
 				
 				String userId = rs.getString(1);
-				int correctnumber = rs.getint(2);
-				int raking = rs.getint(3);
-				int point = rs.getint(4);
-				result.add(new user_rankingVo(userId, correctnumber, raking, point));
+				int correctnumber = rs.getInt(2);
+				int raking = rs.getInt(3);
+				int point = rs.getInt(4);
+				result.add(new User_rankingVo(userId, correctnumber, raking, point));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class user_rankingDAO {
 	}
 	
 	// INSERT
-	public boolean insert(user_rankingVo vo) {
+	public boolean insert(User_rankingVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -107,7 +107,7 @@ public class user_rankingDAO {
 	}
 	
 	// UPDATE
-	public boolean update(user_rankingVo vo) {
+	public boolean update(User_rankingVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -187,8 +187,8 @@ public class user_rankingDAO {
 		}
 	}
 
-	public user_rankingVo select(String userId) {
-		user_rankingVo result = null;
+	public User_rankingVo select(String userId) {
+		User_rankingVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
 		setConnection();
@@ -208,7 +208,7 @@ public class user_rankingDAO {
 				int correctnumber = rs.getInt(2);
 				int raking = rs.getInt(3);
 				int point = rs.getInt(4);
-				result = new user_rankingVo(userId, correctnumber, raking, point);
+				result = new User_rankingVo(userId, correctnumber, raking, point);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
