@@ -186,7 +186,7 @@ public class User_imformationDAO {
 		}
 	}
 
-	public User_imformationVo select(String userId) {
+	public User_imformationVo select(String userId, String pw) {
 		User_imformationVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
@@ -203,12 +203,13 @@ public class User_imformationDAO {
 			
 			// 실행
 			rs = psmt.executeQuery();
-			while(rs.next()) {
+			if(rs.next()==true) {
 				String userPw = rs.getString(2);
 				int ranking = rs.getInt(3);
 				int point = rs.getInt(4);
 				result = new User_imformationVo(userId, userPw, ranking, point);
 			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
