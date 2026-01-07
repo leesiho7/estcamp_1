@@ -41,7 +41,7 @@ public class Song_imformationDAO {
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKING FROM USER_IMFORMATION ORDER BY SINGERNAME";
+		String sql = "SELECT SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKING FROM SONG_IMFORMATION ORDER BY SINGERNAME";
 		
 		// 4. 실행 후 처리
 		try {
@@ -77,7 +77,7 @@ public class Song_imformationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_IMFORMATION(SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKING) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO SONG_IMFORMATION(SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKING) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -115,7 +115,7 @@ public class Song_imformationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - UPDATE
-		String sql = "UPDATE USER_IMFORMATION SET CORRECTEDNUMBER = ? , SONGRANKING = ? WHERE SINGERNAME = ? ";
+		String sql = "UPDATE SONG_IMFORMATION SET CORRECTEDNUMBER = ? , SONGRANKING = ? WHERE SINGERNAME = ? ";
 		
 		// 4. 실행 후 처리
 		try {
@@ -150,7 +150,7 @@ public class Song_imformationDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_IMFORMATION WHERE SINGERNAME = ?";
+		String sql = "DELETE FROM SONG_IMFORMATION WHERE SINGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
@@ -192,7 +192,7 @@ public class Song_imformationDAO {
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT SINGERNAME, CORRECTNUMBER, CORRECTEDNUMBER, SONGRANKING FROM USER_IMFORMATION WHERE SINGERNAME = ?";
+		String sql = "SELECT SINGERNAME, CORRECTNUMBER, CORRECTEDNUMBER, SONGRANKING FROM SONG_IMFORMATION WHERE SINGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
