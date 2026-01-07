@@ -1,6 +1,6 @@
 package model;
 
-public class song_imformationVo {
+public class Song_imformationVo {
 private String sigerName;
 private String songName;
 private int correctedNumber;
@@ -44,7 +44,7 @@ public String toString() {
 }
 
 // 기본생성자 // 전체 멤버를 필요로하는 생성자
-public song_imformationVo (String userId, String userPw, int correctNumber, int raking) {
+public Song_imformationVo (String userId, String userPw, int correctNumber, int raking) {
 	this.sigerName = sigerName;
 	this.songName = songName;
 	this.correctedNumber = correctedNumber;
