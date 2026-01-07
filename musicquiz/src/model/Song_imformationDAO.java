@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Song_imfomationDAO {
+public class Song_imformationDAO {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
 	
-	public Song_imfomationDAO() {
+	public Song_imformationDAO() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -41,7 +41,7 @@ public class Song_imfomationDAO {
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFOMATION ORDER BY SINGERNAME";
+		String sql = "SELECT SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFORMATION ORDER BY SINGERNAME";
 		
 		// 4. 실행 후 처리
 		try {
@@ -77,7 +77,7 @@ public class Song_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_IMFOMATION(SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_IMFORMATION(SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -150,7 +150,7 @@ public class Song_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_IMFOMATION WHERE SINGERNAME = ?";
+		String sql = "DELETE FROM USER_IMFORMATION WHERE SINGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {

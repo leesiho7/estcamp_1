@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class User_imfomationDAO {
+public class User_imformationDAO {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
 	
-	public User_imfomationDAO() {
+	public User_imformationDAO() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -36,12 +36,12 @@ public class User_imfomationDAO {
 		}
 	}
 	
-	public ArrayList<User_imfomationVo> selectAll() {
-		ArrayList<User_imfomationVo> result = null;
+	public ArrayList<User_imformationVo> selectAll() {
+		ArrayList<User_imformationVo> result = null;
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, USER_PW, RANKING, POINT FROM USER_IMFOMATION ORDER BY USER_ID";
+		String sql = "SELECT USER_ID, USER_PW, RANKING, POINT FROM USER_IMFORMATION ORDER BY USER_ID";
 		
 		// 4. 실행 후 처리
 		try {
@@ -50,14 +50,14 @@ public class User_imfomationDAO {
 			
 			while(rs.next()) {
 				if (result == null) {
-					result = new ArrayList<User_imfomationVo>();
+					result = new ArrayList<User_imformationVo>();
 				}
 				
 				String userId = rs.getString(1);
 				String userPw = rs.getString(2);
 				int ranking = rs.getInt(3);
 				int point = rs.getInt(4);
-				result.add(new User_imfomationVo(userId, userPw, ranking, point));
+				result.add(new User_imformationVo(userId, userPw, ranking, point));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class User_imfomationDAO {
 	}
 	
 	// INSERT
-	public boolean insert(User_imfomationVo vo) {
+	public boolean insert(User_imformationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -77,7 +77,7 @@ public class User_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_IMFOMATION(USER_ID, USER_PW, RANKING, POINT) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_IMFORMATION(USER_ID, USER_PW, RANKING, POINT) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -107,7 +107,7 @@ public class User_imfomationDAO {
 	}
 	
 	// UPDATE
-	public boolean update(User_imfomationVo vo) {
+	public boolean update(User_imformationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -150,7 +150,7 @@ public class User_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_IMFOMATION WHERE USER_ID = ?";
+		String sql = "DELETE FROM USER_IMFORMATION WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
@@ -186,8 +186,8 @@ public class User_imfomationDAO {
 		}
 	}
 
-	public User_imfomationVo select(String userId) {
-		User_imfomationVo result = null;
+	public User_imformationVo select(String userId) {
+		User_imformationVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
 		setConnection();
@@ -207,7 +207,7 @@ public class User_imfomationDAO {
 				String userPw = rs.getString(2);
 				int ranking = rs.getInt(3);
 				int point = rs.getInt(4);
-				result = new User_imfomationVo(userId, userPw, ranking, point);
+				result = new User_imformationVo(userId, userPw, ranking, point);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
