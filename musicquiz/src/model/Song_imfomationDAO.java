@@ -41,7 +41,7 @@ public class Song_imfomationDAO {
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT SIGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFOMATION ORDER BY SIGERNAME";
+		String sql = "SELECT SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFOMATION ORDER BY SINGERNAME";
 		
 		// 4. 실행 후 처리
 		try {
@@ -53,11 +53,11 @@ public class Song_imfomationDAO {
 					result = new ArrayList<Song_imformationVo>();
 				}
 				
-				String sigerName = rs.getString(1);
+				String singerName = rs.getString(1);
 				String songName = rs.getString(2);
 				int correctedNumber = rs.getInt(3);
 				int songRanking = rs.getInt(4);
-				result.add(new Song_imformationVo(sigerName, songName, correctedNumber, songRanking));
+				result.add(new Song_imformationVo(singerName, songName, correctedNumber, songRanking));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class Song_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_IMFOMATION(SIGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_IMFOMATION(SINGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -85,7 +85,7 @@ public class Song_imfomationDAO {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setString(1, vo.getsigerName());
+			psmt.setString(1, vo.getsingerName());
 			psmt.setString(2, vo.getsongName());
 			psmt.setInt(3, vo.getcorrectedNumber());
 			psmt.setInt(4, vo.getsongRanking());
@@ -115,7 +115,7 @@ public class Song_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - UPDATE
-		String sql = "UPDATE USER_IMFORMATION SET CORRECTEDNUMBER = ? , SONGRANKIG = ? WHERE SIGERNAME = ? ";
+		String sql = "UPDATE USER_IMFORMATION SET CORRECTEDNUMBER = ? , SONGRANKIG = ? WHERE SINGERNAME = ? ";
 		
 		// 4. 실행 후 처리
 		try {
@@ -124,7 +124,7 @@ public class Song_imfomationDAO {
 			// 실제 값 적용
 			psmt.setInt(1, vo.getcorrectedNumber());
 			psmt.setInt(2, vo.getsongRanking());
-			psmt.setString(3, vo.getsigerName());
+			psmt.setString(3, vo.getsingerName());
 			
 			// 실행
 			int resultSql = psmt.executeUpdate();
@@ -142,7 +142,7 @@ public class Song_imfomationDAO {
 	}
 	
 	// DELETE
-	public boolean delete(int sigerName) {
+	public boolean delete(int singerName) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -150,14 +150,14 @@ public class Song_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_IMFOMATION WHERE SIGERNAME = ?";
+		String sql = "DELETE FROM USER_IMFOMATION WHERE SINGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setInt(1, sigerName);
+			psmt.setInt(1, singerName);
 			
 			// 실행
 			int resultSql = psmt.executeUpdate();
@@ -186,20 +186,20 @@ public class Song_imfomationDAO {
 		}
 	}
 
-	public Song_imformationVo select(String sigerName) {
+	public Song_imformationVo select(String singerName) {
 		Song_imformationVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT SIGERNAME, CORRECTNUMBER, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFORMATION WHERE SIGERNAME = ?";
+		String sql = "SELECT SINGERNAME, CORRECTNUMBER, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFORMATION WHERE SINGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setString(1, sigerName);
+			psmt.setString(1, singerName);
 			
 			// 실행
 			rs = psmt.executeQuery();
@@ -207,7 +207,7 @@ public class Song_imfomationDAO {
 				String songName = rs.getString(2);
 				int correctedNumber = rs.getInt(3);
 				int songRanking = rs.getInt(4);
-				result = new Song_imformationVo(sigerName, songName, correctedNumber, songRanking);
+				result = new Song_imformationVo(singerName, songName, correctedNumber, songRanking);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
