@@ -4,7 +4,7 @@ public class Song_imformationVo {
 private String sigerName;
 private String songName;
 private int correctedNumber;
-private int songRaking;
+private int songRanking;
 
 // Getter // Setter
 public String getsigerName() {
@@ -28,11 +28,11 @@ public void setcorrectedNumber(int correctedNumber) {
 }
 
 public int getsongRanking() {
-	return songRaking;
+	return songRanking;
 }
 
-public void setsongRanking(int songRaking) {
-	this.songRaking = songRaking;
+public void setsongRanking(int songRanking) {
+	this.songRanking = songRanking;
 }
 
 
@@ -40,15 +40,15 @@ public void setsongRanking(int songRaking) {
 // toString
 @Override
 public String toString() {
-	return "Song_Imformation [siger name=" + sigerName + ", song name=" + songName+ ", corrected number=" + correctedNumber + ", song raking=" + songRaking + "]";
+	return "Song_Imformation [siger name=" + sigerName + ", song name=" + songName+ ", corrected number=" + correctedNumber + ", song ranking=" + songRanking + "]";
 }
 
 // 기본생성자 // 전체 멤버를 필요로하는 생성자
-public Song_imformationVo (String userId, String userPw, int correctNumber, int raking) {
+public Song_imformationVo (String userId, String userPw, int correctNumber, int ranking) {
 	this.sigerName = sigerName;
 	this.songName = songName;
 	this.correctedNumber = correctedNumber;
-	this.songRaking = songRaking;
+	this.songRanking = songRanking;
 
 }
 }

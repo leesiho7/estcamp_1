@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class User_imfomationDAO {
+public class Song_imfomationDAO {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	
 	
-	public User_imfomationDAO() {
+	public Song_imfomationDAO() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -36,12 +36,12 @@ public class User_imfomationDAO {
 		}
 	}
 	
-	public ArrayList<User_imfomationVo> selectAll() {
-		ArrayList<User_imfomationVo> result = null;
+	public ArrayList<Song_imformationVo> selectAll() {
+		ArrayList<Song_imformationVo> result = null;
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, USER_PW, RANKING, POINT FROM USER_IMFOMATION ORDER BY USER_ID";
+		String sql = "SELECT SIGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFOMATION ORDER BY SIGERNAME";
 		
 		// 4. 실행 후 처리
 		try {
@@ -50,14 +50,14 @@ public class User_imfomationDAO {
 			
 			while(rs.next()) {
 				if (result == null) {
-					result = new ArrayList<User_imfomationVo>();
+					result = new ArrayList<Song_imformationVo>();
 				}
 				
-				String userId = rs.getString(1);
-				String userPw = rs.getString(2);
-				int ranking = rs.getInt(3);
-				int point = rs.getInt(4);
-				result.add(new User_imfomationVo(userId, userPw, ranking, point));
+				String sigerName = rs.getString(1);
+				String songName = rs.getString(2);
+				int correctedNumber = rs.getInt(3);
+				int songRanking = rs.getInt(4);
+				result.add(new Song_imformationVo(sigerName, songName, correctedNumber, songRanking));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class User_imfomationDAO {
 	}
 	
 	// INSERT
-	public boolean insert(User_imfomationVo vo) {
+	public boolean insert(Song_imformationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -77,7 +77,7 @@ public class User_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_IMFOMATION(USER_ID, USER_PW, RANKING, POINT) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_IMFOMATION(SIGERNAME, SONGNAME, CORRECTEDNUMBER, SONGRANKIG) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -85,10 +85,10 @@ public class User_imfomationDAO {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setString(1, vo.getUserId());
-			psmt.setString(2, vo.getUserPw());
-			psmt.setInt(3, vo.getRanking());
-			psmt.setInt(4, vo.getPoint());
+			psmt.setString(1, vo.getsigerName());
+			psmt.setString(2, vo.getsongName());
+			psmt.setInt(3, vo.getcorrectedNumber());
+			psmt.setInt(4, vo.getsongRanking());
 			
 			// 실행
 			int resultSql = psmt.executeUpdate();
@@ -107,7 +107,7 @@ public class User_imfomationDAO {
 	}
 	
 	// UPDATE
-	public boolean update(User_imfomationVo vo) {
+	public boolean update(Song_imformationVo vo) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -115,16 +115,16 @@ public class User_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - UPDATE
-		String sql = "UPDATE USER_IMFORMATION SET RANKING = ? , POINT = ? WHERE USER_ID = ? ";
+		String sql = "UPDATE USER_IMFORMATION SET CORRECTEDNUMBER = ? , SONGRANKIG = ? WHERE SIGERNAME = ? ";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setInt(1, vo.getRanking());
-			psmt.setInt(2, vo.getPoint());
-			psmt.setString(3, vo.getUserId());
+			psmt.setInt(1, vo.getcorrectedNumber());
+			psmt.setInt(2, vo.getsongRanking());
+			psmt.setString(3, vo.getsigerName());
 			
 			// 실행
 			int resultSql = psmt.executeUpdate();
@@ -142,7 +142,7 @@ public class User_imfomationDAO {
 	}
 	
 	// DELETE
-	public boolean delete(int userId) {
+	public boolean delete(int sigerName) {
 		boolean result = false;
 		
 		// 1. 드라이버 로드 -> 생성자에서 실행
@@ -150,14 +150,14 @@ public class User_imfomationDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_IMFOMATION WHERE USER_ID = ?";
+		String sql = "DELETE FROM USER_IMFOMATION WHERE SIGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setInt(1, userId);
+			psmt.setInt(1, sigerName);
 			
 			// 실행
 			int resultSql = psmt.executeUpdate();
@@ -186,28 +186,28 @@ public class User_imfomationDAO {
 		}
 	}
 
-	public User_imfomationVo select(String userId) {
-		User_imfomationVo result = null;
+	public Song_imformationVo select(String sigerName) {
+		Song_imformationVo result = null;
 		// 1. 드라이버 로드 -> 생성자에서 실행
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RANKING, POINT FROM USER_IMFORMATION WHERE USER_ID = ?";
+		String sql = "SELECT SIGERNAME, CORRECTNUMBER, CORRECTEDNUMBER, SONGRANKIG FROM USER_IMFORMATION WHERE SIGERNAME = ?";
 		
 		// 4. 실행 후 처리
 		try {
 			psmt = conn.prepareStatement(sql);
 			
 			// 실제 값 적용
-			psmt.setString(1, userId);
+			psmt.setString(1, sigerName);
 			
 			// 실행
 			rs = psmt.executeQuery();
 			while(rs.next()) {
-				String userPw = rs.getString(2);
-				int ranking = rs.getInt(3);
-				int point = rs.getInt(4);
-				result = new User_imfomationVo(userId, userPw, ranking, point);
+				String songName = rs.getString(2);
+				int correctedNumber = rs.getInt(3);
+				int songRanking = rs.getInt(4);
+				result = new Song_imformationVo(sigerName, songName, correctedNumber, songRanking);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

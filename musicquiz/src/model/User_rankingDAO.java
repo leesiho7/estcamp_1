@@ -41,7 +41,7 @@ public class User_rankingDAO {
 		
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RAKING, POINT FROM USER_RANKING ORDER BY USER_ID";
+		String sql = "SELECT USER_ID, CORRECTNUMBER, RANKING, POINT FROM USER_RANKING ORDER BY USER_ID";
 		
 		// 4. 실행 후 처리
 		try {
@@ -77,7 +77,7 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - INSERT
-		String sql = "INSERT INTO USER_RAKING(USER_ID, CORRECTNUMBER, RAKING, POINT) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO USER_RANKING(USER_ID, CORRECTNUMBER, RANKING, POINT) VALUES(?, ?, ?, ?)";
 		
 		// 4. 실행 후 처리
 		try {
@@ -115,7 +115,7 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 작성 - UPDATE
-		String sql = "UPDATE USER_RAKING SET CORRECTNUMBER = ?, RAKING = ? , POINT = ? WHERE USER_ID = ? ";
+		String sql = "UPDATE USER_RANKING SET CORRECTNUMBER = ?, RANKING = ? , POINT = ? WHERE USER_ID = ? ";
 		
 		// 4. 실행 후 처리
 		try {
@@ -151,7 +151,7 @@ public class User_rankingDAO {
 		setConnection();
 		
 		// 3. SQL 준비
-		String sql = "DELETE FROM USER_RAKING WHERE USER_ID = ?";
+		String sql = "DELETE FROM USER_RANKING WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
@@ -193,7 +193,7 @@ public class User_rankingDAO {
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RAKING, POINT FROM USER_RAKING WHERE USER_ID = ?";
+		String sql = "SELECT USER_ID, CORRECTNUMBER, RANKING, POINT FROM USER_RANKING WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
