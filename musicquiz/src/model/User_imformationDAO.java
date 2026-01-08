@@ -192,7 +192,7 @@ public class User_imformationDAO {
 		// 2. 연결
 		setConnection();
 		// 3. SQL 작성 - SELECT
-		String sql = "SELECT USER_ID, CORRECTNUMBER, RANKING, POINT FROM USER_IMFORMATION WHERE USER_ID = ?";
+		String sql = "SELECT USER_ID, USER_PW, RANKING, POINT FROM USER_IMFORMATION WHERE USER_ID = ?";
 		
 		// 4. 실행 후 처리
 		try {
