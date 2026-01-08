@@ -30,7 +30,7 @@ public class Main {
 	            System.out.print("선택 >> ");
 
 	            int choice = sc.nextInt();
-
+ 
 	            switch (choice) {
 
 	            case 1:
