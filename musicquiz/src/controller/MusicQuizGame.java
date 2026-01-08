@@ -12,19 +12,16 @@ import model.User_imformationVo;
 public class MusicQuizGame {
 
 	JMP3Player player = new JMP3Player();
-	String path = "C:\\Users\\smhrd\\Desktop\\Java\\workspace\\Mp3player\\src\\source\\";
+	String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
 
-	ArrayList<String> song = new ArrayList<>(Arrays.asList("한로로-01-입춘.mp3", "한요한-01-불꽃 (Feat. 조현아 Of 어반자카파).mp3",
-			"호시X우지 (SEVENTEEN)-03-STUPID IDIOT.mp3", "하현상-03-시간과 흔적.mp3", "임한별-01-그 길에.mp3", "이찬혁-05-멸종위기사랑.mp3",
-			"우디 (Woody)-01-어제보다 슬픈 오늘.mp3", "엔플라잉 (N.Flying)-10-Flashback.mp3", "아이유-10-에필로그.mp3",
-			"순순희(기태),신예영-01-결혼.mp3", "마크툽 (MAKTUB)-01-시작의 아이.mp3", "다비치-01-타임캡슐.mp3", "김동명-01-하늘 끝에서 흘린 눈물.mp3",
-			"ZUTOMAYO-01-TAIDADA.mp3", "Yuuri-01-Dried Flower.mp3", "WOODZ-03-Drowning.mp3",
-			"Swedish House Mafia-07-Don't You Worry Child (Feat. John Martin).mp3", "Sia-01-Unstoppable.mp3",
-			"Rauw Alejandro-01-Todo De Ti.mp3", "Panic! At The Disco-03-High Hopes.mp3",
-			"OFFICIAL HIGE DANDISM-01-Pretender.mp3", "LUCY-01-히어로.mp3", "J. Balvin,Khalid-25-Otra Noche Sin Ti.mp3",
-			"DAY6 (데이식스)-02-한 페이지가 될 수 있게.mp3", "Cody Fry-01-Thinking About You.mp3",
-			"Claire Rosinkranz-01-don't miss me.mp3", "Bad Bunny,Jhayco-01-DÁKITI (Explicit Ver.).mp3",
-			"Avicii-01-Waiting For Love.mp3", "Anonymous Artists(어나니머스 아티스트)-01-퇴사 (Art. 이민석) (Prod. GC).mp3"));
+	ArrayList<String> song = new ArrayList<>(Arrays.asList("Avicii-01-Waiting For Love.mp3",
+			"BewhY (비와이)-02-Day Day (Feat. 박재범) (Prod. by GRAY).mp3", "Calvin Harris-03-Giant.mp3",
+			"J. Balvin,Khalid-4-Otra Noche Sin Ti.mp3", "Jeremih-05-oui.mp3", "LUCY-06-히어로.mp3",
+			"Panic! At The Disco-07-High Hopes.mp3", "pH-1-08-Good Day (Feat. 팔로알토) (Prod. 코드 쿤스트).mp3",
+			"Sia-09-Unstoppable.mp3", "Tones And I-10-Dance Monkey.mp3", "김흥국-11-호랑나비.mp3", "다비치-12-미워도 사랑하니까.mp3",
+			"다비치-13-안녕이라고 말하지마.mp3", "다비치-14-타임캡슐.mp3", "린다G-15-LINDA (Feat. 윤미래).mp3", "박봄-16-봄 (feat. 산다라박).mp3",
+			"비-17-깡.mp3", "오마이걸-18-살짝 설렜어 (Nonstop).mp3", "이찬혁-19-멸종위기사랑.mp3", "존박-20-BLUFF.mp3", "하현상-21-시간과 흔적.mp3",
+			"한로로-22-입춘.mp3", "한요한-23-불꽃 (Feat. 조현아 Of 어반자카파).mp3", "호시X우지 (SEVENTEEN)-24-STUPID IDIOT.mp3"));
 
 	Song_imformationDAO sidao = new Song_imformationDAO();
 
@@ -56,8 +53,8 @@ public class MusicQuizGame {
 				System.out.println("정답은 : " + correct);
 			}
 		}
-			System.out.println("🎮 게임 종료!");
-			System.out.println("메인메뉴로 돌아갑니다...");
-		
+		System.out.println("🎮 게임 종료!");
+		System.out.println("메인메뉴로 돌아갑니다...");
+
 	}
 }
