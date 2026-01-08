@@ -45,7 +45,7 @@ public class MusicQuizGame {
 			Song_imformationVo currentVo = quizList.get(i);
 
 			System.out.print("정답 입력 >> ");
-			String answer = sc.next().trim();
+			String answer = sc.nextLine().trim();
 
 			String correct = currentVo.getsongName();
 
