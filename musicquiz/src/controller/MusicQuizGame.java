@@ -18,7 +18,7 @@ public class MusicQuizGame {
     JMP3Player player = new JMP3Player();
     MainGame Game = new MainGame();
     MainHint Hint = new MainHint();
-    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
+    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",
@@ -102,11 +102,13 @@ public class MusicQuizGame {
                     System.out.println("⭕ 정답! (+5점)");
                     player.stop();
                     sound.correct();
+                    Game.showTure5();
                 } else {
                     score += 10;
                     System.out.println("⭕ 정답! (+10점)");
                     player.stop();
                     sound.correct();
+                    Game.showTure10();
                 }
 
             } else {
