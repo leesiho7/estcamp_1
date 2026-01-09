@@ -3,143 +3,132 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import model.Song_imformationDAO;
 import model.User_imformationDAO;
 import model.User_imformationVo;
 import model.User_rankingDAO;
 import model.User_rankingVo;
+import model.Song_imformationDAO;
+import model.Song_imformationVo;
 
 public class Main {
 
 	public static void main(String[] args) {
-		User_rankingDAO urdao = new User_rankingDAO();
 
-		Song_imformationDAO sidao = new Song_imformationDAO();
+		Scanner sc = new Scanner(System.in);
 
 		User_imformationDAO uidao = new User_imformationDAO();
+		User_rankingDAO urdao = new User_rankingDAO();
+		Song_imformationDAO sidao = new Song_imformationDAO();
 
- 
-		Scanner sc = new Scanner(System.in);
-		System.out.println(sidao.selectAll());
-		 while (true) {
-	            System.out.println("===== 메인 메뉴 =====");
-	            System.out.println("1. 게임시작(로그인)");
-	            System.out.println("2. 회원가입");
-	            System.out.println("3. 랭킹확인");
-	            System.out.println("0. 종료");
-	            System.out.print("선택 >> ");
+		while (true) {
+			System.out.println("===== 메인 메뉴 =====");
+			System.out.println("1. 게임시작(로그인)");
+			System.out.println("2. 회원가입");
+			System.out.println("3. 랭킹확인");
+			System.out.println("0. 종료");
+			System.out.print("선택 >> ");
 
-	            int choice = sc.nextInt();
- 
-	            switch (choice) {
+			int choice = Integer.parseInt(sc.nextLine()); // ⭐ 핵심
 
-	            case 1:
-	                boolean loginSuccess = false;
-	                User_imformationVo loginUser = null; //  로그인 유저 저장 변수
+			switch (choice) {
 
-	                while (true) {
-	                    int failCount = 0;
+			// =========================
+			// 1️⃣ 로그인 → 바로 게임 시작
+			// =========================
+			case 1: {
+				System.out.print("ID : ");
+				String id = sc.nextLine();
 
-	                    //  로그인 시도 (최대 3번)
-	                    while (failCount < 3) {
-	                        System.out.print("ID : ");
-	                        String id = sc.next();
+				System.out.print("PW : ");
+				String pw = sc.nextLine();
 
-	                        System.out.print("PW : ");
-	                        String pw = sc.next();
+				User_imformationVo loginUser = uidao.select(id, pw);
 
-	                        User_imformationVo vo = uidao.select(id, pw);
+				if (loginUser == null) {
+					System.out.println("로그인 실패");
+					break;
+				}
 
-	                        if (vo == null) {
-	                            failCount++;
-	                            System.out.println("로그인 실패 (" + failCount + "/3)");
-	                        } else {
-	                            System.out.println("로그인 성공!");
-	                            loginSuccess = true;
-	                            loginUser = vo; 
-	                            break;
-	                        }
-	                    }
+				System.out.println("로그인 성공!");
+				System.out.println("게임을 시작합니다...");
 
-	                    //  로그인 성공 → 게임 시작
-	                    if (loginSuccess) {
-	                        MusicQuizGame game = new MusicQuizGame();
-	                        int result = game.start(loginUser); // ⭐ 로그인 유저 전달
-	                        if (result == 0) {
-	                        	System.out.println("게임을 종료합니다.");
-	                        	return;   // 프로그램 종료
-	                        }
-	                        break; // case 1 종료 → 메인메뉴로
-	                    }
+				MusicQuizGame game = new MusicQuizGame();
 
-	                    //  로그인 3회 실패 후 선택지
-	                    System.out.println("\n로그인 횟수 초과");
-	                    System.out.println("1. 다시 로그인");
-	                    System.out.println("2. 회원가입");
-	                    System.out.println("3. 메인메뉴");
-	                    System.out.print("선택 >> ");
+				// ⭐ 추가 입력 없이 바로 게임 시작
 
-	                    int select = sc.nextInt();
+				int result = game.start(loginUser, sc);
 
-	                    if (select == 1) {
-	                        continue; // 다시 로그인
-	                    } else if (select == 2) {
-	                        System.out.print("ID : ");
-	                        String newid = sc.next();
-	                        System.out.print("PW : ");
-	                        String newpw = sc.next();
+				if (result == 0) {
+					System.out.println("게임을 종료합니다.");
+					return;
+				}
+				break;
+			}
 
-	                        User_imformationVo newUser =
-	                            new User_imformationVo(newid, newpw, 999, 0);
-	                        uidao.insert(newUser);
+			// =========================
+			// 2️⃣ 회원가입
+			// =========================
+			case 2: {
+				System.out.print("ID : ");
+				String id = sc.nextLine();
 
-	                        System.out.println("회원가입 완료! 다시 로그인하세요.");
-	                    } else {
-	                        break; // 메인메뉴로
-	                    }
-	                }
-	                break;
+				System.out.print("PW : ");
+				String pw = sc.nextLine();
 
-	            case 2:
-	                // 회원가입
-	                System.out.print("ID : ");
-	                String newid = sc.next();
-	                System.out.print("PW : ");
-	                String newpw = sc.next();
+				User_imformationVo vo = new User_imformationVo(id, pw, 999, 0);
 
-	                User_imformationVo vo1 =
-	                    new User_imformationVo(newid, newpw, 999, 0);
-	                uidao.insert(vo1);
+				uidao.insert(vo);
+				System.out.println("회원가입 완료!");
+				break;
+			}
 
-	                System.out.println("회원가입 완료!");
-	                break;
+			// =========================
+			// 3️⃣ 랭킹 확인
+			// =========================
+			case 3: {
+				System.out.println("\n1. 유저 랭킹");
+				System.out.println("2. 노래 랭킹");
+				System.out.print("선택 >> ");
 
-	            case 3:
-	            	// ⭐ TOP 10 랭킹 확인
-	            	ArrayList<User_rankingVo> lists = urdao.selectTop10();
+				int sel = Integer.parseInt(sc.nextLine());
 
-	            	System.out.println("===== 🏆 TOP 10 RANKING 🏆 =====");
-	            	System.out.println("RANK\tUSER_ID\tCORRECT\tPOINT");
-	            	System.out.println("---------------------------------------");
+				if (sel == 1) {
+					ArrayList<User_rankingVo> list = urdao.selectTop10();
 
-	            	for (User_rankingVo vo2 : lists) {
-	            		System.out.printf("%d\t%s\t%d\t%d\n",
-	            				vo2.getRanking(),
-	            				vo2.getUserId(),
-	            				vo2.getcorrectNumber(),
-	            				vo2.getPoint());
-	            	}
+					System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
+					System.out.println("RANK\tID\tCORRECT\tPOINT");
 
-	            	System.out.println("---------------------------------------");
-	            	break;
+					for (User_rankingVo vo : list) {
+						System.out.printf("%d\t%s\t%d\t%d\n", vo.getRanking(), vo.getUserId(), vo.getcorrectNumber(),
+								vo.getPoint());
+					}
+					break;
 
-	            case 0:
-	                System.out.println("종료합니다.");
-	                return; //  프로그램 완전 종료
+				} else if (sel == 2) {
+					ArrayList<Song_imformationVo> songs = sidao.selectTop10();
 
-	            default:
-	                System.out.println("잘못된 선택입니다.");
-	            }
-	        }
-	    }
+					System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
+					System.out.println("RANK\tSONG\t\t\tCORRECT");
+
+					for (Song_imformationVo vo : songs) {
+						System.out.printf("%-5d %-25s %10d%n", vo.getsongRanking(), vo.getsongName(),
+								vo.getcorrectedNumber());
+					}
+
+					break;
+				}
+			}
+
+			// =========================
+			// 0️⃣ 종료
+			// =========================
+			case 0:
+				System.out.println("프로그램을 종료합니다.");
+				return;
+
+			default:
+				System.out.println("잘못된 선택입니다.");
+			}
+		}
 	}
+}
