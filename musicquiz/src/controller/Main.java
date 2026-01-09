@@ -27,35 +27,42 @@ public class Main {
 		MainRanking RankingManu = new MainRanking();
 		MainManu exit = new MainManu();
 		MainGame Game = new MainGame();
-		
+
+		boolean isFirst = true;
+
 		while (true) {
 			// MainLogin > LoginManu
-			loginManu.showIntro();
-			try {
-		        Thread.sleep(3000); // ⭐ 3초 대기
-		    } catch (InterruptedException e) {
-		        e.printStackTrace();
-		    }
-			Game.showGame();
-			try {
-		        Thread.sleep(3000); // ⭐ 3초 대기
-		    } catch (InterruptedException e) {
-		        e.printStackTrace();
-		    }
+			if (isFirst) {
+				loginManu.showIntro();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				Game.showGame();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				isFirst = false; // ⭐ 다시는 실행 안 됨
+			}
 			loginManu.showLoginManu();
 
 			int choice = Integer.parseInt(sc.nextLine()); // ⭐ 핵심
 
 			switch (choice) {
-			
+
 			// =========================
 			// 1️⃣ 로그인 → 바로 게임 시작
 			// =========================
 			case 1: {
 				User_imformationVo vo = MainLogin.showLogin();
-				
+
 				User_imformationVo loginUser = uidao.select(vo.getUserId(), vo.getUserPw());
-				
+
 				if (loginUser == null) {
 					System.out.println("로그인 실패");
 					break;
@@ -76,7 +83,7 @@ public class Main {
 				}
 				break;
 			}
-			
+
 			// MainLogin >> SIGN UP
 			// =========================
 			// 2️⃣ 회원가입
@@ -84,81 +91,124 @@ public class Main {
 			case 2: {
 				User_imformationVo voSign = MainLogin.showSignUp();
 
-				User_imformationVo SignUser = new User_imformationVo(voSign.getUserId(),voSign.getUserPw(), 999, 0);
+				User_imformationVo SignUser = new User_imformationVo(voSign.getUserId(), voSign.getUserPw(), 999, 0);
 
 				uidao.insert(voSign);
 				System.out.println("회원가입 완료!");
 				break;
 			}
-			
+
 			// =========================
 			// 3️⃣ 랭킹 확인
 			// =========================
 			case 3: {
 
-			    while (true) { // ⭐ 랭킹 전용 루프
-			        MainRanking.showRankingManu();
+				boolean goMainMenu = false; // ⭐ 메인메뉴 이동 여부
 
-			        int sel = Integer.parseInt(sc.nextLine());
+				while (true) { // ⭐ 랭킹 전용 루프
+					MainRanking.showRankingManu();
 
-			        // =========================
-			        // 1️⃣ 유저 랭킹
-			        // =========================
-			        if (sel == 1) {
-			            ArrayList<User_rankingVo> list = urdao.selectTop10();
+					int sel;
+					try {
+						sel = Integer.parseInt(sc.nextLine());
+					} catch (Exception e) {
+						System.out.println("숫자를 입력하세요.");
+						continue;
+					}
 
-			            System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
-			            System.out.println("RANK\tID\tCORRECT\tPOINT");
+					// =========================
+					// 1️⃣ 유저 랭킹
+					// =========================
+					if (sel == 1) {
 
-			            for (User_rankingVo vo : list) {
-			                System.out.printf("%d\t%s\t%d\t%d\n",
-			                        vo.getRanking(),
-			                        vo.getUserId(),
-			                        vo.getcorrectNumber(),
-			                        vo.getPoint());
-			            }
+						ArrayList<User_rankingVo> list = urdao.selectTop10();
 
-			            System.out.println("\n0. 뒤로가기");
-			            sc.nextLine(); // ⭐ 아무 키나 누르면 랭킹 메뉴로
+						System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
+						System.out.println("RANK\tID\tCORRECT\tPOINT");
 
-			        }
-			        // =========================
-			        // 2️⃣ 곡 랭킹
-			        // =========================
-			        else if (sel == 2) {
-			            ArrayList<Song_imformationVo> songs = sidao.selectTop10();
+						for (User_rankingVo vo : list) {
+							System.out.printf("%d\t%s\t%d\t%d\n", vo.getRanking(), vo.getUserId(),
+									vo.getcorrectNumber(), vo.getPoint());
+						}
 
-			            System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
-			            System.out.println("RANK  SONG                      CORRECT");
+						// ⭐ 유저랭킹 하위 메뉴
+						while (true) {
+							System.out.println();
+							System.out.println("1. 메인메뉴로 이동");
+							System.out.println("0. 뒤로가기");
+							System.out.print("선택 >> ");
 
-			            for (Song_imformationVo vo : songs) {
-			                System.out.printf("%-5d %-25s %10d%n",
-			                        vo.getsongRanking(),
-			                        vo.getsongName(),
-			                        vo.getcorrectedNumber());
-			            }
+							String input = sc.nextLine();
 
-			            System.out.println("\n0. 뒤로가기");
-			            sc.nextLine(); // ⭐ 랭킹 메뉴로 복귀
-			        }
-			        // =========================
-			        // 0️⃣ 랭킹 메뉴 나가기
-			        // =========================
-			        else if (sel == 0) {
-			            break; // ⭐ case 3 종료 → 메인 메뉴 복귀
-			        }
-			        // =========================
-			        // 잘못된 입력
-			        // =========================
-			        else {
-			            System.out.println("잘못된 선택입니다.");
-			        }
-			    }
+							if (input.equals("1")) {
+								goMainMenu = true;
+								break;
+							}
 
-			    break; // ⭐ switch 탈출
+							if (input.equals("0")) {
+								break;
+							}
+
+							System.out.println("잘못된 입력입니다.");
+						}
+					}
+
+					// =========================
+					// 2️⃣ 곡 랭킹
+					// =========================
+					else if (sel == 2) {
+
+						ArrayList<Song_imformationVo> songs = sidao.selectTop10();
+
+						System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
+						System.out.println("RANK  SONG                      CORRECT");
+
+						for (Song_imformationVo vo : songs) {
+							System.out.printf("%-5d %-25s %10d%n", vo.getsongRanking(), vo.getsongName(),
+									vo.getcorrectedNumber());
+						}
+
+						// ⭐ 곡랭킹 하위 메뉴
+						while (true) {
+							System.out.println();
+							System.out.println("1. 메인메뉴로 이동");
+							System.out.println("0. 뒤로가기");
+							System.out.print("선택 >> ");
+
+							String input = sc.nextLine();
+
+							if (input.equals("1")) {
+								goMainMenu = true;
+								break;
+							}
+
+							if (input.equals("0")) {
+								break;
+							}
+
+							System.out.println("잘못된 입력입니다.");
+						}
+					}
+
+					// =========================
+					// 0️⃣ 랭킹 메뉴 종료
+					// =========================
+					else if (sel == 0) {
+						break; // ⭐ 메인 메뉴로 복귀
+					}
+
+					else {
+						System.out.println("잘못된 선택입니다.");
+					}
+
+					// ⭐ 메인메뉴 이동 신호 감지
+					if (goMainMenu) {
+						break;
+					}
+				}
+
+				break; // ⭐ switch 종료 → 메인 메뉴 while로 복귀
 			}
-
-			
 
 			// =========================
 			// 0️⃣ 종료
