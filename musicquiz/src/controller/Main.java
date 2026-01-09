@@ -28,6 +28,7 @@ public class Main {
 		
 		while (true) {
 			// MainLogin > LoginManu
+			loginManu.showIntro();
 			loginManu.showLoginManu();
 
 			int choice = Integer.parseInt(sc.nextLine()); // ⭐ 핵심

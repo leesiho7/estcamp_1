@@ -11,12 +11,14 @@ import model.User_imformationDAO;
 import model.User_imformationVo;
 import model.User_rankingDAO;
 import view.MainGame;
+import view.MainHint;
 
 public class MusicQuizGame {
 
     JMP3Player player = new JMP3Player();
     MainGame Game = new MainGame();
-    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
+    MainHint Hint = new MainHint();
+    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",
@@ -77,13 +79,14 @@ public class MusicQuizGame {
 
             Song_imformationVo currentVo = quizList.get(i);
             String correct = currentVo.getsongName();
-
+            
             System.out.println("힌트를 원하면 '힌트' 입력");
             System.out.print("정답 입력 >> ");
             String answer = sc.nextLine().trim();
 
             if (answer.equals("힌트")) {
                 usedHint = true;
+                Hint.showHintIntro();
                 System.out.println("💡 힌트 : 노래 제목은 '" + correct.charAt(0) + "' 로 시작합니다");
                 System.out.print("정답 다시 입력 >> ");
                 answer = sc.nextLine().trim();
