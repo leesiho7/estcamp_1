@@ -99,22 +99,42 @@ public class MusicQuizGame {
 
                 if (usedHint) {
                     score += 5;
+                    System.out.println("⭕ 정답! (+5점)");
+                    player.stop();
+                    sound.correct();
                     Game.showTure5();
                 } else {
                     score += 10;
+                    System.out.println("⭕ 정답! (+10점)");
+                    player.stop();
+                    sound.correct();
                     Game.showTure10();
                 }
 
             } else {
             	// 오답
                 Game.showFalse();
+                player.stop();
+                sound.wrong();
                 System.out.println("정답은 : " + correct);
+                
+            }
+            try {
+                Thread.sleep(1500); // ⭐ 효과음 듣는 시간
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            sound.next();
+            try {
+                Thread.sleep(1500); // ⭐ 효과음 듣는 시간
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             System.out.println("현재 점수 : " + score + "점");
             System.out.println("---------------------------------");
 
-            player.stop();
+            
         }
 
         // ============================
