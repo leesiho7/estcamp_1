@@ -64,7 +64,11 @@ public class Main {
 	                    //  로그인 성공 → 게임 시작
 	                    if (loginSuccess) {
 	                        MusicQuizGame game = new MusicQuizGame();
-	                        game.start(loginUser); // ⭐ 로그인 유저 전달
+	                        int result = game.start(loginUser); // ⭐ 로그인 유저 전달
+	                        if (result == 0) {
+	                        	System.out.println("게임을 종료합니다.");
+	                        	return;   // 프로그램 종료
+	                        }
 	                        break; // case 1 종료 → 메인메뉴로
 	                    }
 
@@ -111,22 +115,23 @@ public class Main {
 	                break;
 
 	            case 3:
-	                // 랭킹 확인
-	                ArrayList<User_rankingVo> lists = urdao.selectAll();
+	            	// ⭐ TOP 10 랭킹 확인
+	            	ArrayList<User_rankingVo> lists = urdao.selectTop10();
 
-	                System.out.println("USER_ID\tCORRECTNUMBER\tRANKING\tPOINT");
-	                System.out.println("-------------------------------------------------");
+	            	System.out.println("===== 🏆 TOP 10 RANKING 🏆 =====");
+	            	System.out.println("RANK\tUSER_ID\tCORRECT\tPOINT");
+	            	System.out.println("---------------------------------------");
 
-	                for (User_rankingVo vo2 : lists) {
-	                    System.out.printf("%s \t%d\t\t%d\t%d\n",
-	                            vo2.getUserId(),
-	                            vo2.getcorrectNumber(),
-	                            vo2.getRanking(),
-	                            vo2.getPoint());
-	                }
+	            	for (User_rankingVo vo2 : lists) {
+	            		System.out.printf("%d\t%s\t%d\t%d\n",
+	            				vo2.getRanking(),
+	            				vo2.getUserId(),
+	            				vo2.getcorrectNumber(),
+	            				vo2.getPoint());
+	            	}
 
-	                System.out.println("-------------------------------------------------");
-	                break;
+	            	System.out.println("---------------------------------------");
+	            	break;
 
 	            case 0:
 	                System.out.println("종료합니다.");

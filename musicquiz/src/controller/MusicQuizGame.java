@@ -9,6 +9,7 @@ import model.Song_imformationDAO;
 import model.Song_imformationVo;
 import model.User_imformationDAO;
 import model.User_imformationVo;
+import model.User_rankingDAO;
 
 public class MusicQuizGame {
 
@@ -26,17 +27,18 @@ public class MusicQuizGame {
 
 	Song_imformationDAO sidao = new Song_imformationDAO();
 
-	public void start(User_imformationVo user) {
+	public int start(User_imformationVo user) {
 	    Scanner sc = new Scanner(System.in);
 
 	    ArrayList<Song_imformationVo> quizList = sidao.selectAll();
 
 	    int score = 0; // ⭐ 총 점수
+	    int correctCount = 0;   // ⭐ 정답 개수
 
 	    System.out.println("🎵 음악 퀴즈 시작!");
 	    System.out.println(user.getUserId() + "님 환영합니다!");
 
-	    for (int i = 0; i < quizList.size(); i++) {
+	    for (int i = 0; i < song.size(); i++) {
 
 	        boolean usedHint = false; // ⭐ 문제마다 초기화
 
@@ -58,7 +60,8 @@ public class MusicQuizGame {
 	        }
 
 	        if (correct != null && answer.equalsIgnoreCase(correct.trim())) {
-	            if (usedHint) {
+	        	correctCount++;  // ⭐ 정답 개수 증가
+	        	if (usedHint) {
 	                score += 5;
 	                System.out.println("⭕ 정답! (+5점)");
 	            } else {
@@ -78,16 +81,56 @@ public class MusicQuizGame {
 
 	    System.out.println("🎮 게임 종료!");
 	    System.out.println("최종 점수 : " + score + "점");
+	    System.out.println("정답 개수 : " + correctCount + "개");
+
 	    User_imformationDAO userDao = new User_imformationDAO();
+	    User_rankingDAO rankingDao = new User_rankingDAO();
 
-		// 최고 점수만 갱신 (6번 방식)
-		boolean result = userDao.updateHighPoint(user.getUserId(), score);
+	    // ===============================
+	    // 1️⃣ USER_IMFORMATION 최고 점수 갱신
+	    // ===============================
+	    boolean pointUpdated =
+	    	userDao.updateHighPoint(user.getUserId(), score);
 
-		if (result) {
-			System.out.println("💾 최고 점수 반영 완료!");
-		} else {
-			System.out.println("⚠ 점수 갱신 실패");
+	    if (pointUpdated) {
+	    	System.out.println("💾 최고 점수 갱신 완료!");
+	    } else {
+	    	System.out.println("기존 최고 점수 유지");
+	    }
+
+	    // ===============================
+	    // 2️⃣ USER_RANKING 최고 정답 개수 갱신
+	    // ===============================
+	    boolean correctUpdated =
+	    	rankingDao.updateHighCorrectNumber(
+	    		user.getUserId(),
+	    		correctCount
+	    	);
+
+	    if (correctUpdated) {
+	    	System.out.println("🎯 최고 정답 개수 갱신!");
+	    } else {
+	    	System.out.println("기존 최고 정답 개수 유지");
+	    }
+
+	    // ===============================
+	    // 3️⃣ USER_RANKING 랭킹 재계산
+	    // ===============================
+	    rankingDao.syncFromUserInformation();
+	    System.out.println("🏆 랭킹 정보가 업데이트되었습니다.");
+
+	    while (true) {
+			System.out.println();
+			System.out.println("1. 메인메뉴로 돌아가기");
+			System.out.println("0. 게임 종료");
+			System.out.print("선택 >> ");
+
+			int select = sc.nextInt();
+
+			if (select == 1 || select == 0) {
+				return select;   // ⭐ 결과 반환
+			}
+			System.out.println("잘못된 선택입니다.");
 		}
-	    System.out.println("메인메뉴로 돌아갑니다...");
 	}
 }
