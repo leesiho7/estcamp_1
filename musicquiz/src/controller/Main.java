@@ -3,12 +3,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Song_imformationDAO;
+import model.Song_imformationVo;
 import model.User_imformationDAO;
 import model.User_imformationVo;
 import model.User_rankingDAO;
 import model.User_rankingVo;
-import model.Song_imformationDAO;
-import model.Song_imformationVo;
+import view.MainLogin;
 
 public class Main {
 
@@ -19,31 +20,24 @@ public class Main {
 		User_imformationDAO uidao = new User_imformationDAO();
 		User_rankingDAO urdao = new User_rankingDAO();
 		Song_imformationDAO sidao = new Song_imformationDAO();
-
+		MainLogin loginManu = new MainLogin();
+		
 		while (true) {
-			System.out.println("===== 메인 메뉴 =====");
-			System.out.println("1. 게임시작(로그인)");
-			System.out.println("2. 회원가입");
-			System.out.println("3. 랭킹확인");
-			System.out.println("0. 종료");
-			System.out.print("선택 >> ");
+			// MainLogin > LoginManu
+			loginManu.showLoginManu();
 
 			int choice = Integer.parseInt(sc.nextLine()); // ⭐ 핵심
 
 			switch (choice) {
-
+			
 			// =========================
 			// 1️⃣ 로그인 → 바로 게임 시작
 			// =========================
 			case 1: {
-				System.out.print("ID : ");
-				String id = sc.nextLine();
-
-				System.out.print("PW : ");
-				String pw = sc.nextLine();
-
-				User_imformationVo loginUser = uidao.select(id, pw);
-
+				User_imformationVo vo = MainLogin.showLogin();
+				
+				User_imformationVo loginUser = uidao.select(vo.getUserId(), vo.getUserPw());
+				
 				if (loginUser == null) {
 					System.out.println("로그인 실패");
 					break;
@@ -64,24 +58,21 @@ public class Main {
 				}
 				break;
 			}
-
+			
+			// MainLogin >> SIGN UP
 			// =========================
 			// 2️⃣ 회원가입
 			// =========================
 			case 2: {
-				System.out.print("ID : ");
-				String id = sc.nextLine();
+				User_imformationVo voSign = MainLogin.showSignUp();
 
-				System.out.print("PW : ");
-				String pw = sc.nextLine();
+				User_imformationVo SignUser = new User_imformationVo(voSign.getUserId(),voSign.getUserPw(), 999, 0);
 
-				User_imformationVo vo = new User_imformationVo(id, pw, 999, 0);
-
-				uidao.insert(vo);
+				uidao.insert(voSign);
 				System.out.println("회원가입 완료!");
 				break;
 			}
-
+			
 			// =========================
 			// 3️⃣ 랭킹 확인
 			// =========================

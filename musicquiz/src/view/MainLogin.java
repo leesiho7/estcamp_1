@@ -1,6 +1,11 @@
 package view;
 
+import java.util.Scanner;
+
+import model.User_imformationVo;
+
 public class MainLogin {
+	private static Scanner sc = new Scanner(System.in);
 	// INTRO
 	public static void showIntro() {
 		System.out.println("\r\n"
@@ -51,27 +56,38 @@ public class MainLogin {
 	    System.out.println("├────────────────────────────────────────────────┤");
 	    System.out.println("│               1. LOGIN                         │");
 	    System.out.println("│               2. SIGN UP                       │");
+	    System.out.println("│               3. RANKING                       │");
+	    System.out.println("│               0. EXIT                          │");
 	    System.out.println("└────────────────────────────────────────────────┘");
-	    System.out.print("▶ 선택 : \n");
+	    System.out.print("▶ 선택 : ");
 	}
 	// LOGIN 창
-	public static void showLogin() {
+	public static User_imformationVo showLogin() {
+		User_imformationVo user = new User_imformationVo();
 		System.out.println("==================================================");
 	    System.out.println("                   🎧 LOGIN 🎧");
 	    System.out.println("==================================================");
-	    System.out.println("  ID       : ");
-	    System.out.println("  PASSWORD : ");
+	    System.out.print("  ID       : ");
+	    user.setUserId(sc.nextLine());		
+	    System.out.print("  PASSWORD : ");
+	    user.setUserPw(sc.nextLine());
 	    System.out.println("==================================================");
+	    return user;
 	}
 	// SIGN UP 창
-	public static void showSignUp() {
+	public static User_imformationVo showSignUp() {
+		User_imformationVo user = new User_imformationVo();
 		System.out.println("==================================================");
 	    System.out.println("                  😀 SIGN UP 😀");
 	    System.out.println("==================================================");
-	    System.out.println("  ID       : ");
-	    System.out.println("  PASSWORD : ");
+	    System.out.print("  ID       : ");
+	    user.setUserId(sc.nextLine());
+	    System.out.print("  PASSWORD : ");
+	    user.setUserPw(sc.nextLine());
 	    System.out.println("==================================================");
+	    return user;
 	}
+
 	
 	
 }
