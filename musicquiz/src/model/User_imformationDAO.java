@@ -175,6 +175,7 @@ public class User_imformationDAO {
 		return result;
 	}
 	
+	
 	private void releaseResource() {
 		// 5. 해제
 		try {
@@ -218,5 +219,43 @@ public class User_imformationDAO {
 		releaseResource();
 		return result;
 	}
+	// 최고 점수 갱신 (High Score 방식)
+	public boolean updateHighPoint(String userId, int score) {
+		boolean result = false;
+
+		// 1. 연결
+		setConnection();
+
+		// 2. SQL 작성
+		String sql =
+			"UPDATE USER_IMFORMATION " +
+			"SET POINT = CASE " +
+			"    WHEN NVL(POINT, 0) < ? THEN ? " +
+			"    ELSE NVL(POINT, 0) " +
+			"END " +
+			"WHERE USER_ID = ?";
+
+		// 3. 실행
+		try {
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, score);   // 비교용
+			psmt.setInt(2, score);   // 갱신값
+			psmt.setString(3, userId);
+
+			int resultSql = psmt.executeUpdate();
+			if (resultSql > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// 4. 해제
+		releaseResource();
+
+		return result;
+	}
+
 }
 

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import jplayer.JMP3Player;
 import model.Song_imformationDAO;
 import model.Song_imformationVo;
+import model.User_imformationDAO;
 import model.User_imformationVo;
 
 public class MusicQuizGame {
@@ -26,35 +27,67 @@ public class MusicQuizGame {
 	Song_imformationDAO sidao = new Song_imformationDAO();
 
 	public void start(User_imformationVo user) {
-		Scanner sc = new Scanner(System.in);
+	    Scanner sc = new Scanner(System.in);
 
-		// 🔥 핵심: 문제 리스트
-		ArrayList<Song_imformationVo> quizList = sidao.selectAll();
+	    ArrayList<Song_imformationVo> quizList = sidao.selectAll();
 
-		System.out.println("🎵 음악 퀴즈 시작!");
-		System.out.println(user.getUserId() + "님 환영합니다!");
+	    int score = 0; // ⭐ 총 점수
 
-		for (int i = 0; i < song.size(); i++) {
+	    System.out.println("🎵 음악 퀴즈 시작!");
+	    System.out.println(user.getUserId() + "님 환영합니다!");
 
-			System.out.println((i + 1) + "번 문제!");
-			player.play(path + song.get(i));
+	    for (int i = 0; i < quizList.size(); i++) {
 
-			Song_imformationVo currentVo = quizList.get(i);
+	        boolean usedHint = false; // ⭐ 문제마다 초기화
 
-			System.out.print("정답 입력 >> ");
-			String answer = sc.nextLine().trim();
+	        System.out.println((i + 1) + "번 문제!");
+	        player.play(path + song.get(i));
 
-			String correct = currentVo.getsongName();
+	        Song_imformationVo currentVo = quizList.get(i);
+	        String correct = currentVo.getsongName();
 
-			if (correct != null && answer.equalsIgnoreCase(correct.trim())) {
-				System.out.println("⭕ 정답");
-			} else {
-				System.out.println("❌ 오답");
-				System.out.println("정답은 : " + correct);
-			}
+	        System.out.println("힌트를 원하면 '힌트' 입력");
+	        System.out.print("정답 입력 >> ");
+	        String answer = sc.nextLine().trim();
+
+	        if (answer.equals("힌트")) {
+	            usedHint = true;
+	            System.out.println("💡 힌트 : 노래 제목은 '" + correct.charAt(0) + "' 로 시작합니다");
+	            System.out.print("정답 다시 입력 >> ");
+	            answer = sc.nextLine().trim();
+	        }
+
+	        if (correct != null && answer.equalsIgnoreCase(correct.trim())) {
+	            if (usedHint) {
+	                score += 5;
+	                System.out.println("⭕ 정답! (+5점)");
+	            } else {
+	                score += 10;
+	                System.out.println("⭕ 정답! (+10점)");
+	            }
+	        } else {
+	            System.out.println("❌ 오답");
+	            System.out.println("정답은 : " + correct);
+	        }
+
+	        System.out.println("현재 점수 : " + score + "점");
+	        System.out.println("---------------------------------");
+
+	        player.stop();
+	    }
+
+	    System.out.println("🎮 게임 종료!");
+	    System.out.println("최종 점수 : " + score + "점");
+	    User_imformationDAO userDao = new User_imformationDAO();
+
+		// 최고 점수만 갱신 (6번 방식)
+		boolean result = userDao.updateHighPoint(user.getUserId(), score);
+
+		if (result) {
+			System.out.println("💾 최고 점수 반영 완료!");
+		} else {
+			System.out.println("⚠ 점수 갱신 실패");
 		}
-		System.out.println("🎮 게임 종료!");
-		System.out.println("메인메뉴로 돌아갑니다...");
-
+	    System.out.println("메인메뉴로 돌아갑니다...");
 	}
 }
