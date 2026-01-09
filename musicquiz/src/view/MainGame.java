@@ -21,7 +21,7 @@ public class MainGame {
 	    System.out.println();
 	}
 	
-	public static void showQuestion() {
+	public static void showQuestion(int i) {
 		System.out.println(" ┌───────────────────────────────────────────┐");
 	    System.out.println(" │                                           │");
 	    System.out.println(" │        ████████████████████████           │");
@@ -41,9 +41,9 @@ public class MainGame {
 	    System.out.println(" │  ▶ PLAY   ⏸ PAUSE                   ●    │");
 	    System.out.println(" │                                           │");
 	    System.out.println(" └───────────────────────────────────────────┘");
-		System.out.println(" ╔══════════════════════╗\r\n"
-				         + " ║      QUESTION  1     ║\r\n"
-				         + " ╚══════════════════════╝");
+		System.out.println(" ════════════════════════\r\n"
+				         + "        QUESTION  "+i+"    \r\n"
+				         + " ════════════════════════");
 	}
 	
 	public static void showTure() {
@@ -113,7 +113,7 @@ public class MainGame {
 				+ "                                    █                    ");
 	}
 	
-	public static void showEnding() {
+	public static void showEnding(int a, int b) {
 		System.out.println(" ██████████████████████████████████████████████████╗");
 		System.out.println("██╔═══════════════════════════════════════════════██╗");
 		System.out.println("██║    █████  ███     ███      ████     ██   ███  ██║");
@@ -130,7 +130,9 @@ public class MainGame {
 		System.out.println("              🎉🎉  QUIZ CLEAR!  🎉🎉              ");
 		System.out.println("                                                 ");
 		System.out.println("             모든 음악 퀴즈를 클리어했습니다              ");
-		System.out.println("           🎧 YOU ARE THE BEST USER 🎧              ");
+		System.out.println("                  최종 점수 : "+ a +" 점              ");
+		System.out.println("                  정답 개수 : "+ b +" 개              ");
+		System.out.println("           🎧 YOU ARE THE BEST USER 🎧            ");
 		System.out.println("                                                 ");
 		System.out.println("===================================================");
 		System.out.println("===================================================");

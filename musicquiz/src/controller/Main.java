@@ -10,6 +10,8 @@ import model.User_imformationVo;
 import model.User_rankingDAO;
 import model.User_rankingVo;
 import view.MainLogin;
+import view.MainManu;
+import view.MainRanking;
 
 public class Main {
 
@@ -21,6 +23,8 @@ public class Main {
 		User_rankingDAO urdao = new User_rankingDAO();
 		Song_imformationDAO sidao = new Song_imformationDAO();
 		MainLogin loginManu = new MainLogin();
+		MainRanking RankingManu = new MainRanking();
+		MainManu exit = new MainManu();
 		
 		while (true) {
 			// MainLogin > LoginManu
@@ -77,9 +81,10 @@ public class Main {
 			// 3️⃣ 랭킹 확인
 			// =========================
 			case 3: {
-				System.out.println("\n1. 유저 랭킹");
-				System.out.println("2. 노래 랭킹");
-				System.out.print("선택 >> ");
+//				System.out.println("\n1. 유저 랭킹");
+//				System.out.println("2. 노래 랭킹");
+//				System.out.print("선택 >> ");
+				MainRanking.showRankingManu();
 
 				int sel = Integer.parseInt(sc.nextLine());
 
@@ -114,7 +119,7 @@ public class Main {
 			// 0️⃣ 종료
 			// =========================
 			case 0:
-				System.out.println("프로그램을 종료합니다.");
+				exit.showExit();
 				return;
 
 			default:

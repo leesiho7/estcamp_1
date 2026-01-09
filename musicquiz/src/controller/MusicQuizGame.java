@@ -10,11 +10,13 @@ import model.Song_imformationVo;
 import model.User_imformationDAO;
 import model.User_imformationVo;
 import model.User_rankingDAO;
+import view.MainGame;
 
 public class MusicQuizGame {
 
     JMP3Player player = new JMP3Player();
-    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
+    MainGame Game = new MainGame();
+    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",
@@ -61,16 +63,16 @@ public class MusicQuizGame {
 
         int score = 0;         // 총 점수
         int correctCount = 0;  // 정답 개수
-
-        System.out.println("🎵 음악 퀴즈 시작!");
+        
+        // 게임시작
+        Game.showGame();
         System.out.println(user.getUserId() + "님 환영합니다!");
 
         for (int i = 0; i < quizList.size(); i++) {
 
             boolean usedHint = false;
-
-            System.out.println();
-            System.out.println((i + 1) + "번 문제!");
+            
+            Game.showQuestion(i+1);
             player.play(path + song.get(i));
 
             Song_imformationVo currentVo = quizList.get(i);
@@ -101,7 +103,8 @@ public class MusicQuizGame {
                 }
 
             } else {
-                System.out.println("❌ 오답");
+            	// 오답
+                Game.showFalse();
                 System.out.println("정답은 : " + correct);
             }
 
@@ -114,10 +117,6 @@ public class MusicQuizGame {
         // ============================
         // 게임 종료 처리
         // ============================
-        System.out.println();
-        System.out.println("🎮 게임 종료!");
-        System.out.println("최종 점수 : " + score + "점");
-        System.out.println("정답 개수 : " + correctCount + "개");
 
         User_imformationDAO userDao = new User_imformationDAO();
         User_rankingDAO rankingDao = new User_rankingDAO();
@@ -126,24 +125,12 @@ public class MusicQuizGame {
         boolean pointUpdated =
             userDao.updateHighPoint(user.getUserId(), score);
 
-        if (pointUpdated) {
-            System.out.println("💾 최고 점수 갱신 완료!");
-        } else {
-            System.out.println("기존 최고 점수 유지");
-        }
-
         // 2️⃣ 최고 정답 개수 갱신
         boolean correctUpdated =
             rankingDao.updateHighCorrectNumber(
                 user.getUserId(),
                 correctCount
             );
-
-        if (correctUpdated) {
-            System.out.println("🎯 최고 정답 개수 갱신!");
-        } else {
-            System.out.println("기존 최고 정답 개수 유지");
-        }
 
         // 3️⃣ 유저 랭킹 동기화
         rankingDao.syncFromUserInformation();
@@ -157,10 +144,11 @@ public class MusicQuizGame {
         // 종료 / 메인메뉴 선택
         // ============================
         while (true) {
-            System.out.println();
-            System.out.println("1. 메인메뉴로 돌아가기");
-            System.out.println("0. 게임 종료");
-            System.out.print("선택 >> ");
+//            System.out.println();
+//            System.out.println("1. 메인메뉴로 돌아가기");
+//            System.out.println("0. 게임 종료");
+//            System.out.print("선택 >> ");
+        	Game.showEnding(correctCount, score);
 
             String input = sc.nextLine();
 
