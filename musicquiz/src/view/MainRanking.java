@@ -1,5 +1,10 @@
 package view;
 
+import java.util.ArrayList;
+
+import model.Song_imformationVo;
+import model.User_rankingVo;
+
 public class MainRanking {
 	
 	public static void showRankingIntro() {
@@ -50,15 +55,44 @@ public class MainRanking {
 		System.out.print("▶ 선택 : ");
 	}
 	
-	public static void showUserRanking() {
-		System.out.println("--------------------------------------------------\r\n"
-		                + "                🏁 USER RANKING 🏁\r\n"
-		                 + "--------------------------------------------------\r\n"
-		                       + " RANK | PLAYER      | CORRECT POINT\r\n"
-		                 + "--------------------------------------------------\r\n"
-		                       + "  1   | KIM         |   25  ★★★★★\r\n"
-		                       + "  2   | LEE         |   20  ★★★★☆\r\n"
-		                       + "  3   | PARK        |   15  ★★★☆☆\r\n"
-		                 + "--------------------------------------------------");
+	public static void showUserRanking(ArrayList<User_rankingVo> list) {
+		System.out.println("------------------------------------------------");
+	    System.out.println("               🏁 USER RANKING 🏁");
+	    System.out.println("------------------------------------------------");
+	    System.out.println("RANK | PLAYER        | CORRECT | POINT");
+	    System.out.println("------------------------------------------------");
+		                 for (User_rankingVo vo : list) {
+
+		                     System.out.printf("%-4d | %-13s | %-7d | %-5d%n",
+		                             vo.getRanking(),
+		                             vo.getUserId(),
+		                             vo.getcorrectNumber(),
+		                             vo.getPoint()
+		                             );
+		                 }
+		System.out.println("--------------------------------------------------");
+		System.out.println(" 1. 메인메뉴로 이동 / 0. 뒤로가기");
+		System.out.println("--------------------------------------------------");
+		System.out.print("▶ 선택 : ");
 	}
+	public static void showSongRanking(ArrayList<Song_imformationVo> list) {
+		System.out.println("------------------------------------------------");
+	    System.out.println("               🏁 SONG RANKING 🏁");
+	    System.out.println("------------------------------------------------");
+	    System.out.println("RANK | SONG        | CORRECT ");
+	    System.out.println("------------------------------------------------");
+		                 for (Song_imformationVo vo : list) {
+
+		                     System.out.printf("%-4d | %-13s | %-7d\n",
+		                             vo.getsongRanking(),
+		                             vo.getsongName(),
+		                             vo.getcorrectedNumber()
+		                             );
+		                 }
+		System.out.println("--------------------------------------------------");
+		System.out.println(" 1. 메인메뉴로 이동 / 0. 뒤로가기");
+		System.out.println("--------------------------------------------------");
+		System.out.print("▶ 선택 : ");
+	}
+	
 }

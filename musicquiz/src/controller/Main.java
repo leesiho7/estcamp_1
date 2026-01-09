@@ -123,21 +123,19 @@ public class Main {
 
 						ArrayList<User_rankingVo> list = urdao.selectTop10();
 
-						System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
-						System.out.println("RANK\tID\tCORRECT\tPOINT");
-
-						for (User_rankingVo vo : list) {
-							System.out.printf("%d\t%s\t%d\t%d\n", vo.getRanking(), vo.getUserId(),
-									vo.getcorrectNumber(), vo.getPoint());
-						}
+//						System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
+//						System.out.println("RANK\tID\tCORRECT\tPOINT");
+//
+//						for (User_rankingVo vo : list) {
+//							System.out.printf("%d\t%s\t%d\t%d\n", vo.getRanking(), vo.getUserId(),
+//									vo.getcorrectNumber(), vo.getPoint());
+//						}
 
 						// ⭐ 유저랭킹 하위 메뉴
 						while (true) {
 							System.out.println();
-							System.out.println("1. 메인메뉴로 이동");
-							System.out.println("0. 뒤로가기");
-							System.out.print("선택 >> ");
-
+							RankingManu.showUserRanking(list);
+							
 							String input = sc.nextLine();
 
 							if (input.equals("1")) {
@@ -160,21 +158,10 @@ public class Main {
 
 						ArrayList<Song_imformationVo> songs = sidao.selectTop10();
 
-						System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
-						System.out.println("RANK  SONG                      CORRECT");
-
-						for (Song_imformationVo vo : songs) {
-							System.out.printf("%-5d %-25s %10d%n", vo.getsongRanking(), vo.getsongName(),
-									vo.getcorrectedNumber());
-						}
+						RankingManu.showSongRanking(songs);
 
 						// ⭐ 곡랭킹 하위 메뉴
 						while (true) {
-							System.out.println();
-							System.out.println("1. 메인메뉴로 이동");
-							System.out.println("0. 뒤로가기");
-							System.out.print("선택 >> ");
-
 							String input = sc.nextLine();
 
 							if (input.equals("1")) {
