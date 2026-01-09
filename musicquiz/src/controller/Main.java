@@ -20,7 +20,7 @@ public class Main {
 
 
 		Scanner sc = new Scanner(System.in);
-		
+		System.out.println(sidao.selectAll());
 		 while (true) {
 	            System.out.println("===== 메인 메뉴 =====");
 	            System.out.println("1. 게임시작(로그인)");
