@@ -45,6 +45,7 @@ public class MainRanking {
 		System.out.println("├────────────────────────────────────────────────┤");
 		System.out.println("│               1. USER RANKING                  │");
 		System.out.println("│               2. SONG RANKING                  │");
+		System.out.println("│               0. BACK                          │");
 		System.out.println("└────────────────────────────────────────────────┘");
 		System.out.print("▶ 선택 : ");
 	}
