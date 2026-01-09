@@ -18,7 +18,7 @@ public class Main {
 
 		User_imformationDAO uidao = new User_imformationDAO();
 
-
+ 
 		Scanner sc = new Scanner(System.in);
 		System.out.println(sidao.selectAll());
 		 while (true) {
