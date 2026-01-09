@@ -20,7 +20,7 @@ public class MusicQuizGame {
     MainGame Game = new MainGame();
     MainHint Hint = new MainHint();
     MainManu Ending = new MainManu();
-    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
+    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",
@@ -122,7 +122,7 @@ public class MusicQuizGame {
                 
             }
             try {
-                Thread.sleep(1500); // ⭐ 효과음 듣는 시간
+                Thread.sleep(2000); // ⭐ 효과음 듣는 시간
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

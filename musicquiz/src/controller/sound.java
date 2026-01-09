@@ -10,22 +10,22 @@ public class sound {
 	
 	public static void correct() {
         player.stop();
-        player.play(path+"/correct.mp3");
+        player.play(path+"/true.mp3");
     }
 
     public static void wrong() {
         player.stop();
-        player.play(path+"/wrong.mp3");
+        player.play(path+"/fail.mp3");
     }
 
     public static void next() {
         player.stop();
-        player.play(path+"/next.mp3");
+        player.play(path+"/endbackground.mp3");
     }
     
     public static void clear() {
         player.stop();
-        player.play(path+"/clear.mp3");
+        player.play(path+"/startbackgraound.mp3");
     }
 
     public static void stop() {
