@@ -12,13 +12,15 @@ import model.User_imformationVo;
 import model.User_rankingDAO;
 import view.MainGame;
 import view.MainHint;
+import view.MainManu;
 
 public class MusicQuizGame {
 
     JMP3Player player = new JMP3Player();
     MainGame Game = new MainGame();
     MainHint Hint = new MainHint();
-    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
+    MainManu Ending = new MainManu();
+    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",
@@ -99,16 +101,16 @@ public class MusicQuizGame {
 
                 if (usedHint) {
                     score += 5;
-                    System.out.println("⭕ 정답! (+5점)");
                     player.stop();
                     sound.correct();
                     Game.showTure5();
+                    System.out.println("⭕ 정답! (+5점)");
                 } else {
                     score += 10;
-                    System.out.println("⭕ 정답! (+10점)");
                     player.stop();
                     sound.correct();
                     Game.showTure10();
+                    System.out.println("⭕ 정답! (+10점)");
                 }
 
             } else {
@@ -124,6 +126,7 @@ public class MusicQuizGame {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Game.showNext();
             sound.next();
             try {
                 Thread.sleep(1500); // ⭐ 효과음 듣는 시간
@@ -172,6 +175,8 @@ public class MusicQuizGame {
 //            System.out.println("0. 게임 종료");
 //            System.out.print("선택 >> ");
         	Game.showEnding(correctCount, score);
+        	Ending.showEndingManu();
+        	sound.clear();
 
             String input = sc.nextLine();
 

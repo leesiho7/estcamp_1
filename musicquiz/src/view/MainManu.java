@@ -37,4 +37,15 @@ public class MainManu {
 		                 + "          ╚══════╝ ╚═╝  ╚═╝ ╚═╝    ╚═╝\r\n"
 		                 + "             ♪ 음악 퀴즈를 종료합니다 ♪");
 	}
+	
+	public static void showEndingManu() {
+		System.out.println("┌────────────────────────────────────────────────┐");
+	    System.out.println("│                 [ EXIT  MENU ]                 │");
+		System.out.println("├────────────────────────────────────────────────┤");
+		System.out.println("│                1. MAIN MENU                    │");
+		System.out.println("│                2. EXIT                         │");
+		System.out.println("└────────────────────────────────────────────────┘");
+		System.out.print("▶ 선택 : \n");
+	}
+	
 }
