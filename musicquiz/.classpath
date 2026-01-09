@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/smhrd/Downloads/ojdbc11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/smhrd/git/mini_sjh/musicquiz/src/controller/lib/JMP3Player.jar"/>
+	<classpathentry kind="lib" path="C:/Temp/JMP3Player.jar"/>
+	<classpathentry kind="lib" path="C:/Temp/ojdbc11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
