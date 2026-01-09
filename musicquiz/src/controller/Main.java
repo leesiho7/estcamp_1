@@ -9,6 +9,7 @@ import model.User_imformationDAO;
 import model.User_imformationVo;
 import model.User_rankingDAO;
 import model.User_rankingVo;
+import view.MainGame;
 import view.MainLogin;
 import view.MainManu;
 import view.MainRanking;
@@ -25,10 +26,22 @@ public class Main {
 		MainLogin loginManu = new MainLogin();
 		MainRanking RankingManu = new MainRanking();
 		MainManu exit = new MainManu();
+		MainGame Game = new MainGame();
 		
 		while (true) {
 			// MainLogin > LoginManu
 			loginManu.showIntro();
+			try {
+		        Thread.sleep(3000); // ⭐ 3초 대기
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
+			Game.showGame();
+			try {
+		        Thread.sleep(3000); // ⭐ 3초 대기
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
 			loginManu.showLoginManu();
 
 			int choice = Integer.parseInt(sc.nextLine()); // ⭐ 핵심

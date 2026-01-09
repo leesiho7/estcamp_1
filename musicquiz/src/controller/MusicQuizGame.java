@@ -67,7 +67,7 @@ public class MusicQuizGame {
         int correctCount = 0;  // 정답 개수
         
         // 게임시작
-        Game.showGame();
+        
         System.out.println(user.getUserId() + "님 환영합니다!");
 
         for (int i = 0; i < quizList.size(); i++) {
