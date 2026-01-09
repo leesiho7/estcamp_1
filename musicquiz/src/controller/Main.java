@@ -95,39 +95,70 @@ public class Main {
 			// 3️⃣ 랭킹 확인
 			// =========================
 			case 3: {
-//				System.out.println("\n1. 유저 랭킹");
-//				System.out.println("2. 노래 랭킹");
-//				System.out.print("선택 >> ");
-				MainRanking.showRankingManu();
 
-				int sel = Integer.parseInt(sc.nextLine());
+			    while (true) { // ⭐ 랭킹 전용 루프
+			        MainRanking.showRankingManu();
 
-				if (sel == 1) {
-					ArrayList<User_rankingVo> list = urdao.selectTop10();
+			        int sel = Integer.parseInt(sc.nextLine());
 
-					System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
-					System.out.println("RANK\tID\tCORRECT\tPOINT");
+			        // =========================
+			        // 1️⃣ 유저 랭킹
+			        // =========================
+			        if (sel == 1) {
+			            ArrayList<User_rankingVo> list = urdao.selectTop10();
 
-					for (User_rankingVo vo : list) {
-						System.out.printf("%d\t%s\t%d\t%d\n", vo.getRanking(), vo.getUserId(), vo.getcorrectNumber(),
-								vo.getPoint());
-					}
-					break;
+			            System.out.println("\n===== 🏆 USER RANKING 🏆 =====");
+			            System.out.println("RANK\tID\tCORRECT\tPOINT");
 
-				} else if (sel == 2) {
-					ArrayList<Song_imformationVo> songs = sidao.selectTop10();
+			            for (User_rankingVo vo : list) {
+			                System.out.printf("%d\t%s\t%d\t%d\n",
+			                        vo.getRanking(),
+			                        vo.getUserId(),
+			                        vo.getcorrectNumber(),
+			                        vo.getPoint());
+			            }
 
-					System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
-					System.out.println("RANK\tSONG\t\t\tCORRECT");
+			            System.out.println("\n0. 뒤로가기");
+			            sc.nextLine(); // ⭐ 아무 키나 누르면 랭킹 메뉴로
 
-					for (Song_imformationVo vo : songs) {
-						System.out.printf("%-5d %-25s %10d%n", vo.getsongRanking(), vo.getsongName(),
-								vo.getcorrectedNumber());
-					}
-//1
-					break;
-				}
+			        }
+			        // =========================
+			        // 2️⃣ 곡 랭킹
+			        // =========================
+			        else if (sel == 2) {
+			            ArrayList<Song_imformationVo> songs = sidao.selectTop10();
+
+			            System.out.println("\n===== 🎵 SONG RANKING 🎵 =====");
+			            System.out.println("RANK  SONG                      CORRECT");
+
+			            for (Song_imformationVo vo : songs) {
+			                System.out.printf("%-5d %-25s %10d%n",
+			                        vo.getsongRanking(),
+			                        vo.getsongName(),
+			                        vo.getcorrectedNumber());
+			            }
+
+			            System.out.println("\n0. 뒤로가기");
+			            sc.nextLine(); // ⭐ 랭킹 메뉴로 복귀
+			        }
+			        // =========================
+			        // 0️⃣ 랭킹 메뉴 나가기
+			        // =========================
+			        else if (sel == 0) {
+			            break; // ⭐ case 3 종료 → 메인 메뉴 복귀
+			        }
+			        // =========================
+			        // 잘못된 입력
+			        // =========================
+			        else {
+			            System.out.println("잘못된 선택입니다.");
+			        }
+			    }
+
+			    break; // ⭐ switch 탈출
 			}
+
+			
 
 			// =========================
 			// 0️⃣ 종료
