@@ -114,7 +114,7 @@ public class Main {
 						System.out.printf("%-5d %-25s %10d%n", vo.getsongRanking(), vo.getsongName(),
 								vo.getcorrectedNumber());
 					}
-
+//1
 					break;
 				}
 			}
