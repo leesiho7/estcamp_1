@@ -39,7 +39,7 @@ public class MainGame {
 	    System.out.println(" │                                           │");
 	    System.out.println(" │                         ────────●====╮    │");
 	    System.out.println(" │                                      │    │");
-	    System.out.println(" │  ▶ PLAY   ⏸ PAUSE                   ●    │");
+	    System.out.println(" │  ▶️ PLAY   ⏸ PAUSE                   ●    │");
 	    System.out.println(" │                                           │");
 	    System.out.println(" └───────────────────────────────────────────┘");
 		System.out.println(" ════════════════════════\r\n"

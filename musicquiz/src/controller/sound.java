@@ -6,7 +6,7 @@ public class sound {
 	
 	private static JMP3Player player = new JMP3Player();
 	
-	static String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\sound\\";
+	static String path = "C:\\Users\\smhrd\\Desktop\\sorce\\sound\\";
 	
 	public static void correct() {
         player.stop();
