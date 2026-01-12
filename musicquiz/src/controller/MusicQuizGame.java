@@ -20,7 +20,7 @@ public class MusicQuizGame {
     MainGame Game = new MainGame();
     MainHint Hint = new MainHint();
     MainManu Ending = new MainManu();
-    String path = "C:\\Users\\smhrd\\Desktop\\sorce\\";
+    String path = "C:\\Users\\smhrd_\\Desktop\\sorce\\";
 
     ArrayList<String> song = new ArrayList<>(Arrays.asList(
     	"존박-20-BLUFF.mp3",

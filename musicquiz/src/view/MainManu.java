@@ -45,7 +45,7 @@ public class MainManu {
 		System.out.println("│                1. MAIN MENU                    │");
 		System.out.println("│                2. EXIT                         │");
 		System.out.println("└────────────────────────────────────────────────┘");
-		System.out.print("▶ 선택 : \n");
+		System.out.print("▶ 선택 : ");
 	}
 	
 }
