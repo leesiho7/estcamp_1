@@ -174,7 +174,7 @@ public class MusicQuizGame {
 //            System.out.println("1. 메인메뉴로 돌아가기");
 //            System.out.println("0. 게임 종료");
 //            System.out.print("선택 >> ");
-        	Game.showEnding(correctCount, score);
+        	Game.showEnding(score, correctCount);
         	Ending.showEndingManu();
         	sound.clear();
 
